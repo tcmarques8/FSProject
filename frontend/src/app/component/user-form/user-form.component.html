@@ -1,0 +1,57 @@
+<div id="header">
+    <h1 >{{ isEditMode ? "Edit" : "Add " }} an user</h1>
+</div>
+
+<div id="main_container">
+    <div class="card">
+        <div class="card-body">
+            <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="name" id="name" formControlName="name">
+                    <div *ngIf="userForm.get('name')?.invalid && userForm.get('name')?.touched">
+                      <div class="alert" *ngIf="userForm.get('name')?.errors?.['required']">Name is required.</div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="firstname">Firstname:</label>
+                    <input type="firstname" id="firstname" formControlName="firstname">
+                    <div *ngIf="userForm.get('firstname')?.invalid && userForm.get('firstname')?.touched">
+                      <div class="alert" *ngIf="userForm.get('firstname')?.errors?.['required']">Firstame is required.</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                  <label for="email">Email:</label>
+                  <input type="email" id="email" formControlName="email">
+                  <div *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.touched">
+                    <div class="alert" *ngIf="userForm.get('email')?.errors?.['required']">Email is required.</div>
+                    <div class="alert" *ngIf="userForm.get('email')?.errors?.['email']">Invalid email format.</div>
+                  </div>
+                </div>
+                <div>
+                    <label for="usertype">Type:</label>
+                    <select  formControlName="usertype">
+                        <option *ngFor="let item of userTypeList" value="{{item.type}}">{{item.type}}</option> 
+                    </select> 
+                    <div *ngIf="userForm.get('usertype')?.invalid && userForm.get('usertype')?.touched">
+                      <div class="alert" *ngIf="userForm.get('usertype')?.errors?.['required']">Type is required.</div>
+                    </div>
+                </div>
+                <div class="buttom-container">
+                    <button type="submit" class="btn addbutton" [disabled]="userForm.invalid">{{ isEditMode ? "Edit" : "Create" }}</button>
+                </div>
+                
+              </form>
+
+        </div>
+    </div>
+   
+</div>
+
+<div class="go-back">
+    <ul class="text-center list-inline py-3">
+        <li class="list-inline-item"><a href="/users" routerlink="/users" class="btn btn-info">Back to User List</a></li>
+    </ul>
+</div>

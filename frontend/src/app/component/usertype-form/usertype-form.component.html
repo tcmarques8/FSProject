@@ -1,0 +1,33 @@
+<div id="header">
+    <h1>{{ isEditMode ? "Edit" : "Add" }} an usertype</h1>
+</div>
+
+<div id="main_container">
+    <div class="card">
+        <div class="card-body">
+            <form [formGroup]="typeForm" (ngSubmit)="onSubmit()">
+
+                <div class="form-group">
+                    <label for="type">Type:</label>
+                    <input type="type" id="type" formControlName="type">
+                    <div *ngIf="typeForm.get('type')?.invalid && typeForm.get('type')?.touched">
+                      <div class="alert" *ngIf="typeForm.get('type')?.errors?.['required']">Type is required.</div>
+                    </div>
+                </div>
+                
+                
+               <div class="buttom-container">
+                    <button type="submit" class="btn addbutton" [disabled]="typeForm.invalid">{{ isEditMode ? "Edit" : "Create" }}</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<div class="go-back">
+    <ul class="text-center list-inline py-3">
+        <li class="list-inline-item"><a href="/userstype" routerlink="/userstype" class="btn btn-info">Back to User Type List</a></li>
+    </ul>
+</div>
+
